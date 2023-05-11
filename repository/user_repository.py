@@ -3,7 +3,7 @@ import databaseConector
 
 class UserRepository:
     def create(self, user:User):
-        connection = databaseConector.mysqlconnection("localhost", "root", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
         query = '''
             INSERT INTO user (Name, Document, Password)
             VALUES (%(Name)s, %(Document)s, %(Password)s) 
@@ -22,7 +22,7 @@ class UserRepository:
 
     
     def get(self, id):
-        connection = databaseConector.mysqlconnection("localhost", "root", "xxxxx", "xxxxx")
+        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
         query = '''
             SELECT * FROM user WHERE ID = %(id)s
         '''
@@ -33,4 +33,4 @@ class UserRepository:
         cursor.execute(query, values)
         myresult = cursor.fetchall()
         connection.close()
-        return myresult[0]
+        return myresult

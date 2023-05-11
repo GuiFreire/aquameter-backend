@@ -1,32 +1,32 @@
-from models.sensor import Sensor
+from models.relationship import RelationShip
 import databaseConector
 
-class SensorRepository:
-    def create(self, sensor:Sensor):
+class RelationshipRepository:
+    def create(self, relationship:RelationShip):
         connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
         query = '''
-            INSERT INTO sensor (Sensor_Code, Name, User_id)
-            VALUES (%(Sensor_Code)s, %(Name)s, %(User_id)s) 
+            INSERT INTO relationship (User_id, Parent_User_ID, User_Sensor_Code)
+            VALUES (%(User_id)s, %(Parent_User_ID)s, %(User_Sensor_Code)s) 
         '''
         values = {
-            "Sensor_Code": sensor.sensor_code,
-            "Name": sensor.name,
-            "User_id": sensor.user_id
+            "User_id": relationship.user_id,
+            "Parent_User_ID": relationship.parent_user_id,
+            "User_Sensor_Code": relationship.user_sensor_code
         }
         cursor = connection.cursor()
         cursor.execute(query, values)
         connection.commit()
         cursor.close()
         connection.close()
-        return sensor
+        return relationship
     
-    def get(self, sensor_code):
+    def get(self, parent_user_id):
         connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
         query = '''
-            SELECT * FROM sensor WHERE Sensor_Code = %(sensor_code)s
+            SELECT * FROM relationship WHERE Parent_User_ID = %(Parent_User_ID)s
         '''
         values = {
-            "sensor_code": sensor_code,
+            "Parent_User_ID": parent_user_id,
         }
         cursor = connection.cursor()
         cursor.execute(query, values)
