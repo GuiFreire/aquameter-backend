@@ -14,9 +14,9 @@ def user():
 
         return UserController().create(name, document, password)
     elif request.method == "GET":
-        document = request.args.get("document")
+        id = request.args.get("id")
 
-        return UserController().get(document)
+        return UserController().get(id)
 
 
 @app.route("/sensor", methods = ["POST", "GET"])

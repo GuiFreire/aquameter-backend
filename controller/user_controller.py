@@ -7,10 +7,10 @@ class UserController:
         
         response = UserRepository().create(user)
         
-        return { "id": response.id, "name": response.name, "document": response.document }
+        return "Success to create User"
     
-    def get(self,  document):
-        response = UserRepository().get(document)
+    def get(self,  id):
+        response = UserRepository().get(id)
         
         if len(response) > 0:
             return { "id": response[0], "name": response[1], "document": response[2] }

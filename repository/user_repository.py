@@ -1,28 +1,36 @@
 from models.user import User
-import csv
 import databaseConector
 
 class UserRepository:
     def create(self, user:User):
-        # with open('./repository/user.csv', "a") as csvfile:
-        #     writer = csv.writer(csvfile, delimiter=',')
-        #     writer.writerow([user.id, user.name, user.document, user.password])
-        # return user
-        connection = databaseConector.mysqlconnection("xxx", "xxx", "xxxx", "xxx")
+        connection = databaseConector.mysqlconnection("localhost", "root", "xxxx", "xxxx")
         query = '''
             INSERT INTO user (Name, Document, Password)
-            VALUES ({name}, {document}, {password}) 
-        '''.format(name = str(user.name), document = str(user.document), password = str(user.password))
+            VALUES (%(Name)s, %(Document)s, %(Password)s) 
+        '''
+        values = {
+            "Name": user.name,
+            "Document": user.document,
+            "Password": user.password
+        }
         cursor = connection.cursor()
-        cursor.execute(query)
+        cursor.execute(query, values)
         connection.commit()
+        cursor.close()
+        connection.close()
         return user
 
     
-    def get(self, document):
-        with open('./repository/user.csv', "r") as csvfile:
-            reader = csv.reader(csvfile, delimiter=',')
-            for row in reader:
-                if len(row) > 0 and row[2] == document:
-                    return row
-        return []
+    def get(self, id):
+        connection = databaseConector.mysqlconnection("localhost", "root", "xxxxx", "xxxxx")
+        query = '''
+            SELECT * FROM user WHERE ID = %(id)s
+        '''
+        values = {
+            "id": id,
+        }
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        myresult = cursor.fetchall()
+        connection.close()
+        return myresult[0]
