@@ -2,6 +2,7 @@ from flask import Flask, request
 from controller.user_controller import UserController
 from controller.sensor_controller import SensorController
 from controller.record_controller import RecordController
+from controller.phone_controller import PhoneController
 
 app = Flask(__name__)
 
@@ -47,3 +48,16 @@ def record():
         sensor_code = request.args.get("sensor_code")
 
         return RecordController().get(sensor_code)
+    
+@app.route("/phone", methods = ["POST", "GET"])
+def phone():
+    if request.method == "POST":
+        data = request.get_json()
+        phone_number = data["phone_number"]
+        user_id = data["user_id"]
+
+        return PhoneController().create(phone_number, user_id)
+    elif request.method == "GET":
+        user_id = request.args.get("user_id")
+
+        return PhoneController().get(user_id)
