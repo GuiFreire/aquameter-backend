@@ -9,8 +9,8 @@ class SensorController:
         
         return {"name": response.name, "sensor_code": sensor_code, "user_id": response.user_id }
     
-    def get(self,  document):
-        response = SensorRepository().get(document)
+    def get(self,  sensor_code):
+        response = SensorRepository().get(sensor_code)
         
         if len(response) > 0:
             return {"name": response[0], "sensor_code": response[1], "user_id": response[2] }

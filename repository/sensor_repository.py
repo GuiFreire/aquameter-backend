@@ -1,17 +1,35 @@
 from models.sensor import Sensor
-import csv
+import databaseConector
 
 class SensorRepository:
     def create(self, sensor:Sensor):
-        with open('./repository/sensor.csv', "a") as csvfile:
-            writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow([sensor.name, sensor.sensor_code, sensor.user_id])
+        connection = databaseConector.mysqlconnection("localhost", "root", "xxxxx", "xxxxx")
+        query = '''
+            INSERT INTO sensor (Sensor_Code, Name, User_id)
+            VALUES (%(Sensor_Code)s, %(Name)s, %(User_id)s) 
+        '''
+        values = {
+            "Sensor_Code": sensor.sensor_code,
+            "Name": sensor.name,
+            "User_id": sensor.user_id
+        }
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        connection.commit()
+        cursor.close()
+        connection.close()
         return sensor
     
     def get(self, sensor_code):
-        with open('./repository/sensor.csv', "r") as csvfile:
-            reader = csv.reader(csvfile, delimiter=',')
-            for row in reader:
-                if len(row) > 0 and row[2] == sensor_code:
-                    return row
-        return []
+        connection = databaseConector.mysqlconnection("localhost", "root", "xxxxx", "xxxx")
+        query = '''
+            SELECT * FROM sensor WHERE Sensor_Code = %(sensor_code)s
+        '''
+        values = {
+            "sensor_code": sensor_code,
+        }
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        myresult = cursor.fetchall()
+        connection.close()
+        return myresult[0]

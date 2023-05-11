@@ -7,7 +7,7 @@ class UserController:
         
         response = UserRepository().create(user)
         
-        return "Success to create User"
+        return {"name": response.name, "document": response.document, "password": response.password}
     
     def get(self,  id):
         response = UserRepository().get(id)

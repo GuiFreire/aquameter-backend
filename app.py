@@ -23,12 +23,11 @@ def user():
 def sensor():
     if request.method == "POST":
         data = request.get_json()
-        _id = data["id"]
         name = data["name"]
         sensor_code = data["sensor_code"]
         user_id = data["user_id"]
 
-        return SensorController().create(_id, name, sensor_code, user_id)
+        return SensorController().create(name, sensor_code, user_id)
     elif request.method == "GET":
         sensor_code = request.args.get("sensor_code")
 
