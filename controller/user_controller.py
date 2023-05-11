@@ -2,7 +2,7 @@ from repository.user_repository import UserRepository
 from models.user import User
 
 class UserController:
-    def create(self,  id, name, document, password):
+    def create(self, name, document, password):
         user = User(id=id, name=name, document=document, password=password)
         
         response = UserRepository().create(user)

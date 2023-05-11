@@ -8,12 +8,11 @@ app = Flask(__name__)
 def user():
     if request.method == "POST":
         data = request.get_json() # pega o body da requisiçao
-        _id = data["id"]
         name = data["name"]
         document = data["document"]
         password = data["password"]
 
-        return UserController().create(_id, name, document, password)
+        return UserController().create(name, document, password)
     elif request.method == "GET":
         document = request.args.get("document")
 
