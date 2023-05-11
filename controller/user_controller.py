@@ -13,6 +13,6 @@ class UserController:
         response = UserRepository().get(id)
         
         if len(response) > 0:
-            return { "id": response[0], "name": response[1], "document": response[2] }
+            return response
         else:
             return {}

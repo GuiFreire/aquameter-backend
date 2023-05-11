@@ -1,6 +1,6 @@
 class Record:
-    def __init__(self, id, sensor_id, volume, date):
+    def __init__(self, id, sensor_code, volume, date):
         self.id = id
-        self.sensor_id = sensor_id
+        self.sensor_code = sensor_code
         self.volume = volume
         self.date = date

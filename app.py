@@ -1,6 +1,7 @@
 from flask import Flask, request
 from controller.user_controller import UserController
 from controller.sensor_controller import SensorController
+from controller.record_controller import RecordController
 
 app = Flask(__name__)
 
@@ -14,9 +15,9 @@ def user():
 
         return UserController().create(name, document, password)
     elif request.method == "GET":
-        id = request.args.get("id")
+        _id = request.args.get("id")
 
-        return UserController().get(id)
+        return UserController().get(_id)
 
 
 @app.route("/sensor", methods = ["POST", "GET"])
@@ -32,3 +33,17 @@ def sensor():
         sensor_code = request.args.get("sensor_code")
 
         return SensorController().get(sensor_code)
+    
+
+@app.route("/record", methods = ["POST", "GET"])
+def record():
+    if request.method == "POST":
+        data = request.get_json()
+        sensor_code = data["sensor_code"]
+        volume = data["volume"]
+
+        return RecordController().create(sensor_code, volume)
+    elif request.method == "GET":
+        sensor_code = request.args.get("sensor_code")
+
+        return RecordController().get(sensor_code)
