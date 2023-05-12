@@ -1,11 +1,11 @@
 from mysql.connector import connect
 
-def mysqlconnection (host, user, password, database):
+def mysqlconnection ():
     connection = connect(
-        host = host,
-        user = user,
-        password = password,
-        database = database
+        host = "xxxx",
+        user = "xxxxx",
+        password = "xxxxx",
+        database = "xxxxx"
     )
 
     return connection

@@ -3,7 +3,7 @@ import databaseConector
 
 class SensorRepository:
     def create(self, sensor:Sensor):
-        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection()
         query = '''
             INSERT INTO sensor (Sensor_Code, Name, User_id)
             VALUES (%(Sensor_Code)s, %(Name)s, %(User_id)s) 
@@ -21,7 +21,7 @@ class SensorRepository:
         return sensor
     
     def get(self, sensor_code):
-        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection()
         query = '''
             SELECT * FROM sensor WHERE Sensor_Code = %(sensor_code)s
         '''

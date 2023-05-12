@@ -3,7 +3,7 @@ import databaseConector
 
 class PhoneRepository:
     def create(self, phone:Phone):
-        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection()
         query = '''
             INSERT INTO phone (Phone, User_id)
             VALUES (%(Phone)s, %(User_id)s) 
@@ -20,7 +20,7 @@ class PhoneRepository:
         return phone
     
     def get(self, user_id):
-        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection()
         query = '''
             SELECT * FROM phone WHERE User_id = %(User_id)s
         '''

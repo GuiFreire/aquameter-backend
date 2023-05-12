@@ -3,7 +3,7 @@ import databaseConector
 
 class RelationshipRepository:
     def create(self, relationship:RelationShip):
-        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection()
         query = '''
             INSERT INTO relationship (User_id, Parent_User_ID, User_Sensor_Code)
             VALUES (%(User_id)s, %(Parent_User_ID)s, %(User_Sensor_Code)s) 
@@ -21,7 +21,7 @@ class RelationshipRepository:
         return relationship
     
     def get(self, parent_user_id):
-        connection = databaseConector.mysqlconnection("xxxx", "xxxx", "xxxx", "xxxx")
+        connection = databaseConector.mysqlconnection()
         query = '''
             SELECT * FROM relationship WHERE Parent_User_ID = %(Parent_User_ID)s
         '''
