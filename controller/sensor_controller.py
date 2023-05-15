@@ -6,7 +6,7 @@ class SensorController:
     def create(self, name, sensor_code, user_id):
         sensor = Sensor(name=name, sensor_code=sensor_code, user_id=user_id)
 
-        user = UserRepository.get(user_id)
+        user = UserRepository().get(user_id)
         
         if len(user) > 0 :
             response = SensorRepository().create(sensor)
