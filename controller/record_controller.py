@@ -13,7 +13,7 @@ class RecordController:
             response = RecordRepository().create(record)
             return {"sensor_code": response.sensor_code, "volume": response.volume, "date": response.date }
         else:
-            return {"Nenhum sensor encontrado"}
+            return "Nenhum sensor encontrado"
         
     
     def get(self,  sensor_code):
