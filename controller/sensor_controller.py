@@ -15,10 +15,11 @@ class SensorController:
         else:
             return "Usuário inválido"
 
-    def get(self,  sensor_code):
-        response = SensorRepository().get(sensor_code)
+    def get(self,  user_id):
+        response = SensorRepository().get(user_id)
         
         if len(response) > 0:
-            return response
+            sensor = response[0]
+            return {"sensor_code": sensor[0], "name": sensor[1], "user_id": sensor[2]}
         else:
-            return {}
+            return "Nenhum sensor encontrado"

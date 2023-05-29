@@ -17,7 +17,11 @@ class PhoneController:
     def get(self,  user_id):
         response = PhoneRepository().get(user_id)
         
+        phones = []
         if len(response) > 0:
-            return response
+            for i in response:
+                phones.append(i[1])
+
+            return {"phones": phones}
         else:
             return "Nenhum registro encontrado"

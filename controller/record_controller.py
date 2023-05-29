@@ -23,3 +23,27 @@ class RecordController:
             return response
         else:
             return "Nenhum registro encontrado"
+        
+    
+    def getByMonth(self, sensor_code):
+        response = RecordRepository().getByMonth(sensor_code)
+
+        data = []
+        if len(response) > 0:
+            for i in response:
+                data.append({"volume": i[0], "month": i[1]})
+            return data
+        else:
+            return "Nenhum registro encontrado"
+        
+    
+    def getByDay(self, sensor_code):
+        response = RecordRepository().getByDay(sensor_code)
+
+        data = []
+        if len(response) > 0:
+            for i in response:
+                data.append({"volume": i[0], "day": i[1]})
+            return data
+        else:
+            return "Nenhum registro encontrado"

@@ -9,10 +9,12 @@ class UserController:
         
         return {"name": response.name, "document": response.document, "password": response.password}
     
-    def get(self,  id):
-        response = UserRepository().get(id)
-        
-        if len(response) > 0:
-            return response
+
+    def get(self, document, password):
+        response = UserRepository().get(document, password)
+
+        if len(response) > 0: 
+            user = response[0]
+            return {"id": user[0], "name": user[1], "document": user[2], "password": user[3]}
         else:
-            return {}
+            return "Nenhum usuário encontrado"

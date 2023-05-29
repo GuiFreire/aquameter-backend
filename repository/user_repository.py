@@ -19,15 +19,16 @@ class UserRepository:
         cursor.close()
         connection.close()
         return user
-
     
-    def get(self, id):
+    
+    def get(self, document, password):
         connection = databaseConector.mysqlconnection()
         query = '''
-            SELECT * FROM user WHERE ID = %(id)s
+            SELECT * FROM user WHERE document = %(document)s and password = %(password)s
         '''
         values = {
-            "id": id,
+            "document": document,
+            "password": password
         }
         cursor = connection.cursor()
         cursor.execute(query, values)

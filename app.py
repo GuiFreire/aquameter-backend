@@ -17,9 +17,10 @@ def user():
 
         return UserController().create(name, document, password)
     elif request.method == "GET":
-        _id = request.args.get("id")
+        document = request.args.get("document")
+        password = request.args.get("password")
 
-        return UserController().get(_id)
+        return UserController().get(document, password)
 
 
 @app.route("/sensor", methods = ["POST", "GET"])
@@ -32,9 +33,9 @@ def sensor():
 
         return SensorController().create(name, sensor_code, user_id)
     elif request.method == "GET":
-        sensor_code = request.args.get("sensor_code")
+        user_id = request.args.get("user_id")
 
-        return SensorController().get(sensor_code)
+        return SensorController().get(user_id)
     
 
 @app.route("/record", methods = ["POST", "GET"])
@@ -50,7 +51,17 @@ def record():
 
         return RecordController().get(sensor_code)
 
- 
+
+@app.route("/volume/month/<sensor_code>", methods = ["GET"])
+def getByMonth(sensor_code):
+    return RecordController().getByMonth(sensor_code)
+
+
+@app.route("/volume/day/<sensor_code>", methods = ["GET"])
+def getByDay(sensor_code):
+    return RecordController().getByDay(sensor_code)
+
+
 @app.route("/phone", methods = ["POST", "GET"])
 def phone():
     if request.method == "POST":

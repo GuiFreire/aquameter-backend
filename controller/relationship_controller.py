@@ -24,4 +24,4 @@ class RelationshipController:
         if len(response) > 0:
             return response
         else:
-            return {}
+            return "Nenhum relacionamento encontrado"
