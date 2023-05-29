@@ -35,3 +35,18 @@ class UserRepository:
         myresult = cursor.fetchall()
         connection.close()
         return myresult
+    
+    
+    def getByUserId(self, user_id):
+        connection = databaseConector.mysqlconnection()
+        query = '''
+            SELECT * FROM user WHERE ID = %(user_id)s
+        '''
+        values = {
+            "user_id": int(user_id)
+        }
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        myresult = cursor.fetchall()
+        connection.close()
+        return myresult

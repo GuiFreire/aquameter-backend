@@ -19,7 +19,10 @@ class RecordController:
     def get(self,  sensor_code):
         response = RecordRepository().get(sensor_code)
         
+        data = []
         if len(response) > 0:
+            for i in response:
+                data.append({"Sensor_Code": i[0], "Volume": i[1], "Date": i[2]})
             return response
         else:
             return "Nenhum registro encontrado"
