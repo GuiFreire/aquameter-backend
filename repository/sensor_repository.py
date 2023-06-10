@@ -21,13 +21,13 @@ class SensorRepository:
         return sensor
     
 
-    def get(self, user_id):
+    def get(self, sensor_code):
         connection = databaseConector.mysqlconnection()
         query = '''
-            SELECT * FROM sensor WHERE user_id = %(user_id)s
+            SELECT * FROM sensor WHERE Sensor_Code = %(sensor_code)s
         '''
         values = {
-            "user_id": user_id,
+            "sensor_code": sensor_code,
         }
         cursor = connection.cursor()
         cursor.execute(query, values)
