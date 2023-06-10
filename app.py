@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS, cross_origin
 from controller.user_controller import UserController
 from controller.sensor_controller import SensorController
 from controller.record_controller import RecordController
@@ -6,6 +7,10 @@ from controller.phone_controller import PhoneController
 from controller.relationship_controller import RelationshipController
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+@cross_origin()
 
 @app.route("/user", methods = ["POST", "GET"])
 def user():
