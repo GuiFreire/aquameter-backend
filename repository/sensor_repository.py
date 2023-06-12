@@ -35,6 +35,22 @@ class SensorRepository:
         connection.close()
         return myresult
     
+
+    def getBySensorCode(self, sensor_code):
+        connection = databaseConector.mysqlconnection()
+        query = '''
+            SELECT * FROM sensor WHERE sensor_code = %(sensor_code)s
+        '''
+        values = {
+            "sensor_code": sensor_code,
+        }
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        myresult = cursor.fetchall()
+        connection.close()
+        return myresult
+
+
     def getByRelationship(self, user_id):
         connection = databaseConector.mysqlconnection()
         query = '''

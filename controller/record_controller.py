@@ -7,7 +7,7 @@ class RecordController:
     def create(self, sensor_code, volume):
         record = Record(id=id, sensor_code=sensor_code, volume=volume, date=datetime.datetime.now())
 
-        sensor = SensorRepository().get(sensor_code)
+        sensor = SensorRepository().getBySensorCode(sensor_code)
 
         if len(sensor) > 0:
             response = RecordRepository().create(record)
