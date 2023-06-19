@@ -69,3 +69,23 @@ class RecordRepository:
         myresult = cursor.fetchall()
         connection.close()
         return myresult
+
+    
+    def getByHour(self, sensor_code):
+        connection = databaseConector.mysqlconnection()
+        query = '''
+            SELECT sensor_code, SUM(volume) as "total_volume", HOUR(date) AS "hora_registro" 
+            FROM record 
+            WHERE sensor_code = %(sensor_code)s
+            GROUP BY sensor_code, HOUR(date) 
+            ORDER BY total_volume 
+            DESC LIMIT 3
+        '''
+        values = {
+            "sensor_code": sensor_code,
+        }
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        myresult = cursor.fetchall()
+        connection.close()
+        return myresult

@@ -50,3 +50,15 @@ class RecordController:
             return data
         else:
             return "Nenhum registro encontrado"
+        
+    
+    def getByHour(self, sensor_code):
+        response = RecordRepository().getByHour(sensor_code)
+
+        data = []
+        if len(response) > 0:
+            for i in response:
+                data.append({"sensor_code": i[0], "total_volume": i[1], "hora_registro": i[2]})
+                return data
+        else:
+            return "Nenhum registro encontrado"

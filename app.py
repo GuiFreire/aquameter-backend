@@ -67,6 +67,11 @@ def getByDay(sensor_code):
     return RecordController().getByDay(sensor_code)
 
 
+@app.route("/volume/hour/<sensor_code>", methods = ["GET"])
+def getByHour(sensor_code):
+    return RecordController().getByHour(sensor_code)
+
+
 @app.route("/phone", methods = ["POST", "GET"])
 def phone():
     if request.method == "POST":
