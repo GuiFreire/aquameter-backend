@@ -74,9 +74,9 @@ class RecordRepository:
     def getByHour(self, sensor_code):
         connection = databaseConector.mysqlconnection()
         query = '''
-            SELECT sensor_code, SUM(volume) as "total_volume", HOUR(date) AS "hora_registro" 
+            SELECT sensor_code, AVG(volume) as "total_volume", HOUR(date) AS "hora_registro" 
             FROM record 
-            WHERE sensor_code = %(sensor_code)s
+            WHERE sensor_code = %(sensor_code)s AND volume != 0
             GROUP BY sensor_code, HOUR(date) 
             ORDER BY total_volume 
             DESC LIMIT 3
